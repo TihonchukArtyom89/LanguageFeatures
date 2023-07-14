@@ -98,5 +98,23 @@ public class HomeController : Controller
     //    //});
     //    return View(Product.GetProducts().Select(p=>p?.Name));//rewritten return with lambda expression
     //}
-    public ViewResult Index()=> View(Product.GetProducts().Select(p=>p?.Name));//rewritten index action method with lambda expression in one line
+    //public ViewResult Index()=> View(Product.GetProducts().Select(p=>p?.Name));//rewritten index action method with lambda expression in one line
+    public ViewResult Index()
+    {
+        //var names = new[] { "Kayak", "Lifejacket", "Soccer ball" };//using type interference
+        //var products= new[] {//using anonymous type
+        //    new {Name="Kayak",Price=275M},
+        //    new {Name="Lifejacket",Price=48.95M},
+        //    new {Name="Soccer ball",Price=19.50M},
+        //    new {Name="Corner flag",Price=34.95M}
+        //};
+        //return View(products.Select(p => p.GetType().Name));
+        IProductSelection cart = new ShoppingCart (//using default implementations in interface
+            new Product {Name="Kayak",Price=275M},
+            new Product {Name="Lifejacket",Price=48.95M},
+            new Product {Name="Soccer ball",Price=19.50M},
+            new Product {Name="Corner flag",Price=34.95M}
+        );
+        return View(cart.Names);
+    }
 }
