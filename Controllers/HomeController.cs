@@ -99,22 +99,49 @@ public class HomeController : Controller
     //    return View(Product.GetProducts().Select(p=>p?.Name));//rewritten return with lambda expression
     //}
     //public ViewResult Index()=> View(Product.GetProducts().Select(p=>p?.Name));//rewritten index action method with lambda expression in one line
+    //public ViewResult Index()
+    //{
+    //    //var names = new[] { "Kayak", "Lifejacket", "Soccer ball" };//using type interference
+    //    //var products= new[] {//using anonymous type
+    //    //    new {Name="Kayak",Price=275M},
+    //    //    new {Name="Lifejacket",Price=48.95M},
+    //    //    new {Name="Soccer ball",Price=19.50M},
+    //    //    new {Name="Corner flag",Price=34.95M}
+    //    //};
+    //    //return View(products.Select(p => p.GetType().Name));
+    //    //IProductSelection cart = new ShoppingCart (//using default implementations in interface
+    //    //    new Product {Name="Kayak",Price=275M},
+    //    //    new Product {Name="Lifejacket",Price=48.95M},
+    //    //    new Product {Name="Soccer ball",Price=19.50M},
+    //    //    new Product {Name="Corner flag",Price=34.95M}
+    //    //);
+    //    //return View(cart.Names);
+    //}
+    //public async Task<ViewResult> Index()//asynchronous action method
+    //{
+    //    //long? length = await MyAsyncMethods.GetPageLenght();
+    //    //return View(new string[] { $"Length: {length}"});
+    //    //List<string> output = new List<string>();
+    //    //foreach (long? len in await MyAsyncMethods.GetPageLengths(output, "apress.com", "microsoft.com", "amazon.com"))
+    //    //{
+    //    //    output.Add($"Page length: {len}");
+    //    //}
+    //    //return View(output);
+    //    List<string> output = new List<string>();
+    //    await foreach (long? len in MyAsyncMethods.GetPageLengths(output, "apress.com", "microsoft.com", "amazon.com"))
+    //    {
+    //        output.Add($"Page length: {len}");
+    //    }
+    //    return View(output);
+    //}
     public ViewResult Index()
     {
-        //var names = new[] { "Kayak", "Lifejacket", "Soccer ball" };//using type interference
-        //var products= new[] {//using anonymous type
-        //    new {Name="Kayak",Price=275M},
-        //    new {Name="Lifejacket",Price=48.95M},
-        //    new {Name="Soccer ball",Price=19.50M},
-        //    new {Name="Corner flag",Price=34.95M}
-        //};
-        //return View(products.Select(p => p.GetType().Name));
-        IProductSelection cart = new ShoppingCart (//using default implementations in interface
-            new Product {Name="Kayak",Price=275M},
-            new Product {Name="Lifejacket",Price=48.95M},
-            new Product {Name="Soccer ball",Price=19.50M},
-            new Product {Name="Corner flag",Price=34.95M}
-        );
-        return View(cart.Names);
+        var products = new[] {  
+            new {Name="Kayak",Price=275M},
+            new {Name="Lifejacket",Price=48.95M},
+            new {Name="Soccer ball",Price=19.50M},
+            new {Name="Corner flag",Price=34.95M}
+        };
+        return View(products.Select(p=>$"{nameof(p.Name)}: {p.Name}, {nameof(p.Price)}: {p.Price}"));//use nameof
     }
 }
