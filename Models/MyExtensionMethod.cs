@@ -28,4 +28,24 @@ public static class MyExtensionMethod//class of extension method (extension Shop
             }
         }
     }
+    //public static IEnumerable<Product?> FilterByName(this IEnumerable<Product?> productEnum, char firstLetter)
+    //{
+    //    foreach (Product? prod in productEnum)
+    //    {
+    //        if (prod?.Name?[0]  >= firstLetter)
+    //        {
+    //            yield return prod;
+    //        }
+    //    }
+    //}
+    public static IEnumerable<Product?> Filter(this IEnumerable<Product?> productEnum, Func<Product?,bool> selector)
+    {
+        foreach (Product? prod in productEnum)
+        {
+            if (selector(prod))
+            {
+                yield return prod;
+            }
+        }
+    }
 }
